@@ -1,28 +1,21 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class Hrequest {
     private static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-    private static DateTimeFormatter dformat = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
     public static void main(String[] args) throws IOException {
-        Request request = new Request();
-        Responce responce = new Responce();
-        List<String> urlList = ListValidUrls();
-        List<String> headersList = GetHeadersList();
-        request.setMethod(headersList.get(0).split("\\s+")[0]);
-        request.setRequestUrl(headersList.get(0).split("\\s+")[1]);
-        setHeaders(request, headersList);
-        setBodyParam(request, headersList);
 
+        List<String> urlList = ListValidUrls();
+        Request request = getRequest();
+        Responce responce = new Responce();
         ResponceSetHeaders(request, responce);
 
+        System.out.println(request.getCookies());
         boolean valid = validator(urlList, request.getRequestUrl());
-        if ((request.isResource() && headersList.get(headersList.size() - 1) == null) || (request.getMethod().equals("POST") && headersList.get(headersList.size() - 1).equals(""))) {
+        if (request.isResource() && request.getBodyParameters().size() == 0) {
             responce.setStatusCode(400);
             responce.setContent("There was an error with the requested functionality due to malformed request.".getBytes());
         } else {
@@ -44,6 +37,22 @@ public class Hrequest {
         }
 
         System.out.println(responce.toString());
+    }
+
+    private static Request getRequest() throws IOException {
+        Request request = new Request();
+        List<String> headersList = GetHeadersList();
+        request.setMethod(headersList.get(0).split("\\s+")[0]);
+        request.setRequestUrl(headersList.get(0).split("\\s+")[1]);
+        setHeaders(request, headersList);
+        setBodyParam(request, headersList);
+        if (request.getHeaders().containsKey("Cookie")) {
+            Arrays.stream(request.getHeaders().get("Cookie").split(";\\s+")).forEach(p -> {
+                String[] kv = p.split("=");
+                request.addCookies(new Cookies(kv[0], kv[1]));
+            });
+        }
+        return request;
     }
 
     private static List<String> ListValidUrls() throws IOException {
@@ -77,7 +86,7 @@ public class Hrequest {
     }
 
     private static void ResponceSetHeaders(Request request, Responce responce) {
-        request.getHeaders().entrySet().stream().filter(f->!f.getKey().equals("Authorization")).forEach(p -> responce.getHeaders().put(p.getKey(), p.getValue()));
+        request.getHeaders().entrySet().stream().filter(f -> !f.getKey().equals("Authorization")).forEach(p -> responce.getHeaders().put(p.getKey(), p.getValue()));
     }
 
     private static boolean validator(List<String> list, String str) {

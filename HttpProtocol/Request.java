@@ -1,4 +1,5 @@
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Request implements HttpRequest {
 
@@ -6,15 +7,29 @@ public class Request implements HttpRequest {
     private String requestUrl;
     private Map<String,String> headers;
     private Map<String,String> bodyParameters;
+    private Collection<Cookies> cookies;
 
     public Request(){
          this.headers = new LinkedHashMap<>();
          this.bodyParameters = new LinkedHashMap<>();
+         cookies = new ArrayList<>();
     }
 
     @Override
     public Map<String, String> getHeaders() {
         return this.headers;
+    }
+
+    public String getCookies() {
+        StringBuilder output = new StringBuilder();
+        output.append("Cookie: ");
+        output.append(cookies.stream().map(c->c.getKey()+"="+c.getValue()).collect(Collectors.joining("; ")));
+        output.append(System.lineSeparator());
+        return output.toString();
+    }
+
+    public void addCookies(Cookies cookie) {
+        this.cookies.add(cookie);
     }
 
     @Override
@@ -54,16 +69,13 @@ public class Request implements HttpRequest {
 
     @Override
     public boolean isResource() {
-        if(this.method.equals("POST")){
-            return true;
-        }
-        return false;
+        return this.method.equals("POST");
     }
     @Override
     public String toString(){
         StringBuilder output = new StringBuilder();
          output.append(String.format("%s %s HTTP/1.1",this.method,this.requestUrl)).append(System.lineSeparator());
-          this.headers.entrySet().stream().forEach(p->output.append(String.format("%s: %s",p.getKey(),p.getValue()))
+          this.headers.forEach((key1, value1) -> output.append(String.format("%s: %s", key1, value1))
                   .append(System.lineSeparator()));
           output.append(System.lineSeparator());
         List<String> pList = new ArrayList<>();
