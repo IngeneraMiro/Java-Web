@@ -1,7 +1,5 @@
 package com.ingenera.demo.models.servicemodels;
 
-import com.ingenera.demo.models.entities.Role;
-
 public class UserServiceModel extends BaseServiceModel {
 
     private String username;

@@ -1,19 +1,17 @@
 package com.ingenera.demo.models.servicemodels;
 
-import com.ingenera.demo.models.entities.Roles;
-
 public class RoleServiceModel extends BaseServiceModel{
 
-    private Roles roles;
+    private String name;
 
     public RoleServiceModel() {
     }
 
-    public Roles getRoles() {
-        return roles;
+    public String getName() {
+        return name;
     }
 
-    public void setRoles(Roles roles) {
-        this.roles = roles;
+    public void setName(String name) {
+        this.name = name;
     }
 }

@@ -6,22 +6,21 @@ import javax.persistence.*;
 @Table(name = "roles")
 public class Role extends BaseEntity{
 
-    private Roles name;
+    private String name;
 
     public Role() {
     }
 
-    public Role(Roles roles){
-        this.name = roles;
+    public Role(String name){
+        this.name = name;
     }
 
     @Column(name = "name",unique = true,nullable = false)
-    @Enumerated(EnumType.STRING)
-    public Roles getName() {
+    public String getName() {
         return name;
     }
 
-    public void setName(Roles name) {
+    public void setName(String name) {
         this.name = name;
     }
 }

@@ -25,15 +25,21 @@ public class RoleServiceImpl implements RoleService {
     @PostConstruct
     public void init(){
         if(this.roleRepository.count()==0){
-            Role admin = new Role(Roles.ADMIN);
-            Role user = new Role(Roles.USER);
+            Role admin = new Role("ADMIN");
+            Role user = new Role("USER");
             this.roleRepository.save(admin);
             this.roleRepository.save(user);
         }
     }
 
     @Override
-    public RoleServiceModel getNyName(String name) {
-        return this.roleRepository.getByName(name).map(role -> this.mapper.map(role,RoleServiceModel.class)).orElse(null);
+    public RoleServiceModel getByName(String name) {
+
+        return this.roleRepository.findByName(name).map(role -> this.mapper.map(role,RoleServiceModel.class)).orElse(null);
+    }
+
+    @Override
+    public Role getRole(String name) {
+        return this.roleRepository.getByName(name);
     }
 }

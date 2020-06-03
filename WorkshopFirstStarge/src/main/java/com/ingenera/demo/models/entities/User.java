@@ -1,9 +1,6 @@
 package com.ingenera.demo.models.entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "users")
@@ -55,7 +52,7 @@ public class User extends BaseEntity {
     }
 
 
-    @ManyToOne
+    @ManyToOne(cascade= CascadeType.REFRESH)
     public Role getRole() {
         return role;
     }
