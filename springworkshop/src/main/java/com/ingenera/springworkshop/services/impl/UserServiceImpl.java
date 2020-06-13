@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -62,5 +64,11 @@ public class UserServiceImpl implements UserService {
              user.setRole(roleService.getRoleByName("ADMIN"));
          }
         return mapper.map(userRepo.save(user),UserServiceModel.class);
+    }
+
+    @Override
+    public List<UserBindModel> getAllUsers() {
+     return   this.userRepo.findAll().stream().map(u->this.mapper.map(u,UserBindModel.class)).collect(Collectors.toList());
+
     }
 }

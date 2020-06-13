@@ -1,7 +1,9 @@
 package com.ingenera.springworkshop.web;
 
 import com.ingenera.springworkshop.models.bindmodels.ExerciseBindModel;
+import com.ingenera.springworkshop.models.bindmodels.UserBindModel;
 import com.ingenera.springworkshop.services.ExerciseService;
+import com.ingenera.springworkshop.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -11,15 +13,19 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
     private final ExerciseService exerciseService;
+    private final UserService userService;
 
     @Autowired
-    public AdminController(ExerciseService exerciseService) {
+    public AdminController(ExerciseService exerciseService, UserService userService) {
         this.exerciseService = exerciseService;
+        this.userService = userService;
     }
 
     @GetMapping("/rights")
@@ -27,6 +33,7 @@ public class AdminController {
     public String right(){
         return "<h2>You have no rights to view this page !!!<h2>";
     }
+
 
     @GetMapping("/add_exercise")
     public ModelAndView addExercise(@Valid @ModelAttribute("exerciseBindModel")ExerciseBindModel exerciseBindModel,
@@ -40,6 +47,7 @@ public class AdminController {
         }
         return modelAndView;
     }
+
 
     @PostMapping("/add_exercise")
     public ModelAndView exerciseValidate(@Valid @ModelAttribute("exerciseBindModel")ExerciseBindModel exerciseBindModel,
@@ -64,7 +72,8 @@ public class AdminController {
     public ModelAndView addRole(ModelAndView modelAndView,HttpSession session){
 
         if(session.getAttributeNames().hasMoreElements() && session.getAttribute("role").equals("ADMIN")){
-
+            List<String> users = this.userService.getAllUsers().stream().map(UserBindModel::getUsername).collect(Collectors.toList());
+            modelAndView.addObject("users",users);
             modelAndView.setViewName("role-add");
         }else{
             modelAndView.setViewName("redirect:/admin/rights");

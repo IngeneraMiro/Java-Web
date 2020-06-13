@@ -4,6 +4,8 @@ import com.ingenera.springworkshop.models.bindmodels.UserBindModel;
 import com.ingenera.springworkshop.models.entities.User;
 import com.ingenera.springworkshop.models.viewmodels.UserServiceModel;
 
+import java.util.List;
+
 public interface UserService {
 
     UserServiceModel getServiceModel(String username);
@@ -13,4 +15,6 @@ public interface UserService {
     boolean checkUsername(String username);
 
     UserServiceModel registerUser(UserBindModel userBindModel);
+
+    List<UserBindModel> getAllUsers();
 }
