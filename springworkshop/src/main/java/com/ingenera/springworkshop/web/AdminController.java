@@ -1,16 +1,26 @@
 package com.ingenera.springworkshop.web;
 
+import com.ingenera.springworkshop.models.bindmodels.ExerciseBindModel;
+import com.ingenera.springworkshop.services.ExerciseService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
+    private final ExerciseService exerciseService;
+
+    @Autowired
+    public AdminController(ExerciseService exerciseService) {
+        this.exerciseService = exerciseService;
+    }
 
     @GetMapping("/rights")
     @ResponseBody
@@ -19,9 +29,11 @@ public class AdminController {
     }
 
     @GetMapping("/add_exercise")
-    public ModelAndView addExercise(ModelAndView modelAndView, HttpSession session){
+    public ModelAndView addExercise(@Valid @ModelAttribute("exerciseBindModel")ExerciseBindModel exerciseBindModel,
+                                    BindingResult result,ModelAndView modelAndView, HttpSession session){
         System.out.println();
         if(session.getAttributeNames().hasMoreElements() && session.getAttribute("role").equals("ADMIN")){
+            modelAndView.addObject("exerciseBindModel",exerciseBindModel);
             modelAndView.setViewName("exercise-add");
         }else{
             modelAndView.setViewName("redirect:/admin/rights");
@@ -29,14 +41,35 @@ public class AdminController {
         return modelAndView;
     }
 
+    @PostMapping("/add_exercise")
+    public ModelAndView exerciseValidate(@Valid @ModelAttribute("exerciseBindModel")ExerciseBindModel exerciseBindModel,
+                                         BindingResult result, HttpSession session, RedirectAttributes redirectAttributes,
+                                         ModelAndView modelAndView){
+        if(session!=null) {
+            if (result.hasErrors()) {
+                redirectAttributes.addFlashAttribute("exerciseBindModel", exerciseBindModel);
+                modelAndView.setViewName("redirect:/admin/add_exercise");
+            } else {
+                  this.exerciseService.createNewExercise(exerciseBindModel);
+                  modelAndView.setViewName("redirect:/home");
+            }
+        }else{
+            modelAndView.setViewName("redirect:/users/login");
+        }
+        return modelAndView;
+    }
+
 
     @GetMapping("/add_role")
     public ModelAndView addRole(ModelAndView modelAndView,HttpSession session){
+
         if(session.getAttributeNames().hasMoreElements() && session.getAttribute("role").equals("ADMIN")){
+
             modelAndView.setViewName("role-add");
         }else{
             modelAndView.setViewName("redirect:/admin/rights");
         }
+
         return modelAndView;
 
     }
