@@ -13,11 +13,12 @@ public class Role extends BaseClass implements GrantedAuthority {
 
     public Role() {
     }
-    public Role(String role){
+
+    public Role(String role) {
         this.authority = role;
     }
 
-    @Column(name = "authority",unique = true,nullable = false)
+    @Column(name = "authority", unique = true, nullable = false)
     public String getAuthority() {
         return authority;
     }

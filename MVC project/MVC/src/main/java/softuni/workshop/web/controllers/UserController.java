@@ -22,24 +22,24 @@ public class UserController extends BaseController {
     }
 
     @GetMapping(value = "/register")
-    public ModelAndView register(){
+    public ModelAndView register() {
         return super.view("user/register");
 //        return new ModelAndView("user/register","title","register");
     }
 
     @PostMapping("/register")
-    public ModelAndView registerConfirm(@ModelAttribute UserRegisterModel userRegisterModel){
-          if(!userRegisterModel.getPassword().equals(userRegisterModel.getConfirmPassword())){
-              return super.redirect("/user/register");
+    public ModelAndView registerConfirm(@ModelAttribute UserRegisterModel userRegisterModel) {
+        if (!userRegisterModel.getPassword().equals(userRegisterModel.getConfirmPassword())) {
+            return super.redirect("/user/register");
 //              return new ModelAndView("redirect:/user/register");
-          }
-          userService.registerUser(userRegisterModel);
-          return super.redirect("/user/login");
+        }
+        userService.registerUser(userRegisterModel);
+        return super.redirect("/user/login");
 //        return new ModelAndView("redirect:/user/login");
     }
 
     @GetMapping(value = "/login")
-    public ModelAndView login(){
+    public ModelAndView login() {
         return super.view("user/login");
 //        return new ModelAndView("user/login");
     }

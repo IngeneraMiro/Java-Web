@@ -29,16 +29,18 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserServiceModel getUserByName(String name) {
-        return this.userRepository.getByUsername(name).map(user->this.mapper.map(user,UserServiceModel.class)).orElse(null);
+        User user = this.userRepository.getByUsername(name);
+        if(user==null){
+            return null;
+        }
+        return this.mapper.map(user, UserServiceModel.class);
     }
 
     @Override
     public UserServiceModel registerUser(UserServiceModel userServiceModel) {
-        RoleServiceModel roleServiceModel = this.roleService.getByName("USER");
-        Role role = this.mapper.map(roleServiceModel,Role.class);
+        User user = this.mapper.map(userServiceModel, User.class);
+        user.setRole(this.roleService.getByName(this.userRepository.count() == 0 ? "ADMIN" : "USER"));
 
-        userServiceModel.setRole(this.roleService.getByName(this.userRepository.count()==0? "ADMIN":"USER"));
-        User user = this.mapper.map(userServiceModel,User.class);
 
         this.userRepository.saveAndFlush(user);
         return userServiceModel;

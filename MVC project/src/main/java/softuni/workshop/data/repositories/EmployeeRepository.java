@@ -1,5 +1,5 @@
 package softuni.workshop.data.repositories;
 
-public interface EmployeeRepository  {
+public interface EmployeeRepository {
     //TODO
 }

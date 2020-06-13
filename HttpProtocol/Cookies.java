@@ -2,9 +2,9 @@ public class Cookies {
     private String key;
     private String value;
 
-    public Cookies(String key,String value){
-    this.key = key;
-    this.value = value;
+    public Cookies(String key, String value) {
+        this.key = key;
+        this.value = value;
     }
 
     public String getKey() {

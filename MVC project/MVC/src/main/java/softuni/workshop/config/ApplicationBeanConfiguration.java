@@ -23,7 +23,7 @@ public class ApplicationBeanConfiguration {
     }
 
     @Bean
-    public XmlParser xmlParser(){
+    public XmlParser xmlParser() {
         return new XmlParserImpl();
     }
 }

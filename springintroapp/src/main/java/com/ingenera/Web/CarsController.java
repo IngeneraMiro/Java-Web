@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class CarsController {
 
     @RequestMapping("/")
-    public String[] getCars(){
-        return new String[]{"Black","Red","White"};
+    public String[] getCars() {
+        return new String[]{"Black", "Red", "White"};
     }
 }

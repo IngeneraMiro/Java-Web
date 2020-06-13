@@ -3,7 +3,7 @@ package softuni.workshop.data.entities;
 import javax.persistence.*;
 
 @Entity(name = "employee")
-public class Employee extends BaseClass{
+public class Employee extends BaseClass {
     private String firstName;
     private String lastName;
     private int age;
@@ -12,7 +12,7 @@ public class Employee extends BaseClass{
     public Employee() {
     }
 
-    @Column(name = "first_name",nullable = false)
+    @Column(name = "first_name", nullable = false)
     public String getFirstName() {
         return firstName;
     }
@@ -21,7 +21,7 @@ public class Employee extends BaseClass{
         this.firstName = firstName;
     }
 
-    @Column(name = "last_name",nullable = false)
+    @Column(name = "last_name", nullable = false)
     public String getLastName() {
         return lastName;
     }
@@ -30,7 +30,7 @@ public class Employee extends BaseClass{
         this.lastName = lastName;
     }
 
-    @Column(name = "age",nullable = false)
+    @Column(name = "age", nullable = false)
     public int getAge() {
         return age;
     }
@@ -40,7 +40,7 @@ public class Employee extends BaseClass{
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "project_id",nullable = false)
+    @JoinColumn(name = "project_id", nullable = false)
     public Project getProject() {
         return project;
     }

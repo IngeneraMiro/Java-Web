@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "offers")
-public class Offer extends BaseEntity{
+public class Offer extends BaseEntity {
 
     private String description;
     private Engins engine;

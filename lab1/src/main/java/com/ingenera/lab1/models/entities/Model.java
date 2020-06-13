@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "models")
-public class Model extends BaseEntity{
+public class Model extends BaseEntity {
 
     private String name;
     private String imageUrl;

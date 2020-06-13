@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<th:block th:include="/fragments/header"/>
+
+<body>
+
+<div>
+    <th:block th:include="/fragments/navbar"/>
+</div>
+
+<div class="container">
+    <h2 class="text-center text-white m-3">All Brands</h2>
+    <div class='row mb-4 d-flex justify-content-around'>
+        <div th:each="brand, b: ${brands}" class="brand-section col-md-5 mr-auto d-flex flex-column">
+            <h2>Car brand:
+                <span th:text="${brand.getName()}"></span>
+            </h2>
+            <div>Models:
+                <table>
+                    <tr>
+                        <th>No</th>
+                        <th>Name</th>
+                        <th>Category</th>
+                        <th>Start Year</th>
+                        <th>End Year</th>
+                        <th>Picture</th>
+                    </tr>
+                    <tr th:each="model, m: ${brand.models}">
+                        <th th:text="${model.getId()}"></th>
+                        <th th:text="${model.getName()}"></th>
+                        <th th:text="${model.getType().toString()}"></th>
+                        <th th:text="${model.getStartYear()}"></th>
+                        <th th:text="${model.getEndYear()}">Model End Year</th>
+                        <th><img th:src="${model.getImageUrl()}" class="img-thumbnail rounded"></th>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <!--    <footer>Create your custom footer :)</footer>-->
+    </div>
+</div>
+</body>
+</html>

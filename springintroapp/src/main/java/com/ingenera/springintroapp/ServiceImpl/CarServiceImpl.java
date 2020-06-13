@@ -6,6 +6,6 @@ import org.springframework.stereotype.Service;
 public class CarServiceImpl implements com.ingenera.springintroapp.Services.CarService {
     @Override
     public String[] getAllCars() {
-        return new String[]{"Black","White","Red"};
+        return new String[]{"Black", "White", "Red"};
     }
 }

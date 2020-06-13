@@ -6,10 +6,10 @@ import java.util.Map;
 
 public class Responce implements HttpResponce {
     private int statusCode;
-    private Map<String,String> headers;
+    private Map<String, String> headers;
     private byte[] content;
 
-    public Responce(){
+    public Responce() {
         this.headers = new LinkedHashMap<>();
     }
 
@@ -40,26 +40,26 @@ public class Responce implements HttpResponce {
 
     @Override
     public void setContent(byte[] content) {
-       this.content = content;
+        this.content = content;
     }
 
     @Override
     public void addHeader(String key, String value) {
-        this.headers.put(key,value);
+        this.headers.put(key, value);
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         StringBuilder output = new StringBuilder();
-        output.append(String.format("HTTP/1.1 %d %S",this.statusCode,ResponceCodes.getStaus(this.statusCode))).append(System.lineSeparator())
-        .append("Date: ");
-        if(!this.headers.containsKey("Date")){
+        output.append(String.format("HTTP/1.1 %d %S", this.statusCode, ResponceCodes.getStaus(this.statusCode))).append(System.lineSeparator())
+                .append("Date: ");
+        if (!this.headers.containsKey("Date")) {
             output.append(LocalDate.now().format(DateTimeFormatter.ofLocalizedDate(FormatStyle.SHORT))).append(System.lineSeparator());
-        }else {
+        } else {
             output.append(this.headers.get("Date")).append(System.lineSeparator());
         }
-        this.headers.entrySet().stream().filter(f->!f.getKey().equals("Date")).forEach(p->output.append(String.format("%s: %s",p.getKey(),p.getValue())).append(System.lineSeparator()));
-        output.append(System.lineSeparator()).append(String.format("%s",new String(this.content))).append(System.lineSeparator());
+        this.headers.entrySet().stream().filter(f -> !f.getKey().equals("Date")).forEach(p -> output.append(String.format("%s: %s", p.getKey(), p.getValue())).append(System.lineSeparator()));
+        output.append(System.lineSeparator()).append(String.format("%s", new String(this.content))).append(System.lineSeparator());
 
         return output.toString();
     }

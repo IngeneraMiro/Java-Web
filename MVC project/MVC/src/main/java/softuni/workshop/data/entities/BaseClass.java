@@ -11,7 +11,7 @@ public abstract class BaseClass {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id",nullable = false,updatable = false,unique = true)
+    @Column(name = "id", nullable = false, updatable = false, unique = true)
     public Integer getId() {
         return id;
     }

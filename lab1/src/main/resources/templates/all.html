@@ -25,19 +25,19 @@
             </ul>
         </div>
     </nav>
-        <h2 class="text-center text-white mt-5">West Compass Offers</h2>
-        <hr style="width: 50%"/>
-        <div class='row mb-4 d-flex justify-content-around'>
-            <th:block th:each="o: ${offers}">
-                <div class="col-md-4 d-flex flex-column bg-text mb-3">
-                    <h2 th:text="|Car brand: ${o.getModel().getBrand().getName()}|"></h2>
-                    <h4 th:text="|Model: ${o.getModel().getName()}|"></h4>
-                    <h4 th:text="|Year: ${o.year}|"></h4>
-                    <h4 th:text="|Engine: ${o.getEngine().name().toString()}|"></h4>
-                    <h4 th:text="|Price: ${o.getPrice().toString()}|"></h4>
-                    <h4><a class="btn-block" th:href="@{/cars/details/{id}(id=${o.id})}">Details</a></h4>
-                </div>
-            </th:block>
+    <h2 class="text-center text-white mt-5">West Compass Offers</h2>
+    <hr style="width: 50%"/>
+    <div class='row mb-4 d-flex justify-content-around'>
+        <th:block th:each="o: ${offers}">
+            <div class="col-md-4 d-flex flex-column bg-text mb-3">
+                <h2 th:text="|Car brand: ${o.getModel().getBrand().getName()}|"></h2>
+                <h4 th:text="|Model: ${o.getModel().getName()}|"></h4>
+                <h4 th:text="|Year: ${o.year}|"></h4>
+                <h4 th:text="|Engine: ${o.getEngine().name().toString()}|"></h4>
+                <h4 th:text="|Price: ${o.getPrice().toString()}|"></h4>
+                <h4><a class="btn-block" th:href="@{/cars/details/{id}(id=${o.id})}">Details</a></h4>
+            </div>
+        </th:block>
     </div>
 </main>
 </body>

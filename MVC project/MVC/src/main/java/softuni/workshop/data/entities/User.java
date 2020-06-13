@@ -17,7 +17,7 @@ public class User extends BaseClass implements UserDetails {
     public User() {
     }
 
-    @Column(name = "email",nullable = false,unique = true)
+    @Column(name = "email", nullable = false, unique = true)
     public String getEmail() {
         return email;
     }
@@ -27,7 +27,7 @@ public class User extends BaseClass implements UserDetails {
     }
 
 
-    @Column(name = "password",nullable = false, unique = true)
+    @Column(name = "password", nullable = false, unique = true)
     public String getPassword() {
         return password;
     }
@@ -36,7 +36,7 @@ public class User extends BaseClass implements UserDetails {
         this.password = password;
     }
 
-    @Column(name = "username",nullable = false, unique = true)
+    @Column(name = "username", nullable = false, unique = true)
     public String getUsername() {
         return username;
     }
@@ -46,9 +46,9 @@ public class User extends BaseClass implements UserDetails {
     }
 
 
-    @ManyToMany(fetch =FetchType.EAGER )
-    @JoinTable(name = "user_role",joinColumns = @JoinColumn(name = "user_id",referencedColumnName = "id")
-       ,inverseJoinColumns = @JoinColumn(name = "role_id",referencedColumnName = "id"))
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id")
+            , inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
     public Set<Role> getAuthorities() {
         return this.authorities;
     }

@@ -23,15 +23,15 @@ public class HomeController extends BaseController {
 
     //    @RequestMapping(value = "/",method = RequestMethod.GET)
     @GetMapping(value = "/")
-    public ModelAndView Index(){
+    public ModelAndView Index() {
         return new ModelAndView("index");
     }
 
     @GetMapping(value = "/home")
-    public ModelAndView home(){
+    public ModelAndView home() {
         ModelAndView modelAndView = new ModelAndView("home");
         boolean areImported = companyService.areImported() && employeeService.areImported() && projectService.areImported();
-        modelAndView.addObject("areImported",areImported);
+        modelAndView.addObject("areImported", areImported);
         return modelAndView;
     }
 }

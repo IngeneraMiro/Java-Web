@@ -40,18 +40,18 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     @Transactional
     public void importEmployees() throws JAXBException, FileNotFoundException {
-        EmployeeSeedRootDto employeeSeedRootDto = xmlParser.importFromXml(EmployeeSeedRootDto.class,GlobalConstants.XML_EMPLOYEE_PATH);
-         for (EmployeeSeedDto e: employeeSeedRootDto.getEmployeeSeedDtoList()){
-             Employee employee = mapper.map(e,Employee.class);
-             Project project = projectService.getProjectByName(employee.getProject().getName());
-             employee.setProject(project);
-             employeeRepository.save(employee);
-         }
+        EmployeeSeedRootDto employeeSeedRootDto = xmlParser.importFromXml(EmployeeSeedRootDto.class, GlobalConstants.XML_EMPLOYEE_PATH);
+        for (EmployeeSeedDto e : employeeSeedRootDto.getEmployeeSeedDtoList()) {
+            Employee employee = mapper.map(e, Employee.class);
+            Project project = projectService.getProjectByName(employee.getProject().getName());
+            employee.setProject(project);
+            employeeRepository.save(employee);
+        }
     }
 
     @Override
     public boolean areImported() {
-        return employeeRepository.count()>0;
+        return employeeRepository.count() > 0;
     }
 
     @Override
@@ -64,7 +64,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     public String exportEmployeesWithAgeAbove() {
         StringBuilder sb = new StringBuilder();
         List<Employee> employees = employeeRepository.getEmployeesWithAgeAbove();
-        for (Employee e: employees){
+        for (Employee e : employees) {
             sb.append("Name: ").append(e.getFirstName()).append(" ").append(e.getLastName())
                     .append("\n\tAge: ").append(e.getAge()).append("\n\tProject name: ").
                     append(e.getProject().getName()).append(System.lineSeparator());

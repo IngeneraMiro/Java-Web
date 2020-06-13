@@ -6,17 +6,17 @@ import javax.persistence.OneToMany;
 import java.util.List;
 
 @Entity(name = "companies")
-public class Company extends BaseClass{
-      private String name;
-      private List<Project> projectList;
+public class Company extends BaseClass {
+    private String name;
+    private List<Project> projectList;
 
     public Company() {
     }
 
-     public Company(String name,List<Project> list){
+    public Company(String name, List<Project> list) {
         this.name = name;
         this.projectList = list;
-     }
+    }
 
     @OneToMany(mappedBy = "company")
     public List<Project> getProjectList() {
@@ -27,7 +27,7 @@ public class Company extends BaseClass{
         this.projectList = projectList;
     }
 
-    @Column(name = "name",nullable = false)
+    @Column(name = "name", nullable = false)
     public String getName() {
         return name;
     }

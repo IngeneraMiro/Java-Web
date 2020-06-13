@@ -8,7 +8,7 @@ import softuni.workshop.data.entities.Employee;
 import java.util.List;
 
 @Repository
-public interface EmployeeRepository  extends JpaRepository<Employee,Integer> {
+public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
 
     @Query("select e from employee as e where e.age>25")
     List<Employee> getEmployeesWithAgeAbove();

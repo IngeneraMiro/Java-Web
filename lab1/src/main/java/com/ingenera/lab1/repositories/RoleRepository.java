@@ -8,9 +8,9 @@ import org.springframework.stereotype.Repository;
 import java.util.Set;
 
 @Repository
-public interface RoleRepository extends JpaRepository<Role,Long> {
+public interface RoleRepository extends JpaRepository<Role, Long> {
 
-   @Query(value = "SELECT r FROM Role r WHERE r.id is not null")
+    @Query(value = "SELECT r FROM Role r WHERE r.id is not null")
     Set<Role> getAllRoles();
 
 }

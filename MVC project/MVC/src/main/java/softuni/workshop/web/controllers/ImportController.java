@@ -29,9 +29,9 @@ public class ImportController extends BaseController {
     }
 
     @GetMapping("/xml")
-    public ModelAndView xmls(){
+    public ModelAndView xmls() {
 
-        boolean[] areImported = new boolean[]{companyService.areImported(),projectService.areImported(),employeeService.areImported()};
+        boolean[] areImported = new boolean[]{companyService.areImported(), projectService.areImported(), employeeService.areImported()};
         ModelAndView modelAndView = new ModelAndView("xml/import-xml");
         modelAndView.addObject("areImported", areImported);
         return modelAndView;
@@ -41,7 +41,7 @@ public class ImportController extends BaseController {
     public ModelAndView companies() throws IOException {
         String text = companyService.readCompaniesXmlFile();
         ModelAndView modelAndView = new ModelAndView("xml/import-companies");
-        modelAndView.addObject("companies",text);
+        modelAndView.addObject("companies", text);
         return modelAndView;
     }
 
@@ -56,7 +56,7 @@ public class ImportController extends BaseController {
 
         String text = employeeService.readEmployeesXmlFile();
         ModelAndView modelAndView = new ModelAndView("xml/import-employees");
-        modelAndView.addObject("employees",text);
+        modelAndView.addObject("employees", text);
         return modelAndView;
     }
 
@@ -70,7 +70,7 @@ public class ImportController extends BaseController {
     public ModelAndView projects() throws IOException {
         String text = projectService.readProjectsXmlFile();
         ModelAndView modelAndView = new ModelAndView("xml/import-projects");
-        modelAndView.addObject("projects",text);
+        modelAndView.addObject("projects", text);
         return modelAndView;
     }
 

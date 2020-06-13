@@ -16,7 +16,7 @@ public class UserRegisterBindingModel {
     public UserRegisterBindingModel() {
     }
 
-    @Length(min = 2,max = 10,message = "Username must be between 2 and 10 characters")
+    @Length(min = 2, max = 10, message = "Username must be between 2 and 10 characters")
     public String getUsername() {
         return username;
     }
@@ -25,7 +25,7 @@ public class UserRegisterBindingModel {
         this.username = username;
     }
 
-    @Length(min = 3,max = 10,message = "Password must be betweeen 3 and 10 characters")
+    @Length(min = 3, max = 10, message = "Password must be betweeen 3 and 10 characters")
     public String getPassword() {
         return password;
     }
@@ -51,7 +51,7 @@ public class UserRegisterBindingModel {
         this.email = email;
     }
 
-    @Pattern(regexp = "https:\\/\\/github\\.com\\/.+\\/.+",message = "Enter git address following this pattern")
+    @Pattern(regexp = "https:\\/\\/github\\.com\\/.+\\/.+", message = "Enter git address following this pattern")
     public String getGit() {
         return git;
     }

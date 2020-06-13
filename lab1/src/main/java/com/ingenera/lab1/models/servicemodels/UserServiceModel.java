@@ -5,7 +5,7 @@ import com.ingenera.lab1.models.entities.Role;
 import java.time.LocalDateTime;
 import java.util.Set;
 
-public class UserServiceModel extends BaseServiceModel{
+public class UserServiceModel extends BaseServiceModel {
 
     private String username;
     private String firstName;

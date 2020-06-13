@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "exercises")
-public class Exercise extends BaseEntity{
+public class Exercise extends BaseEntity {
 
     private String name;
     private LocalDateTime startedOn;
@@ -21,7 +21,7 @@ public class Exercise extends BaseEntity{
     public Exercise() {
     }
 
-    @Column(name = "name",nullable = false,unique = true)
+    @Column(name = "name", nullable = false, unique = true)
     @Length(min = 2)
     public String getName() {
         return name;

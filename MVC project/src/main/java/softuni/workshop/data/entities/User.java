@@ -1,5 +1,5 @@
 package softuni.workshop.data.entities;
 
-public class User{
+public class User {
     //TODO
 }

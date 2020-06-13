@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "brands")
-public class Brand extends BaseEntity{
+public class Brand extends BaseEntity {
 
     private String name;
     private LocalDateTime created;
@@ -18,7 +18,7 @@ public class Brand extends BaseEntity{
     public Brand() {
     }
 
-    @Column(name = "name",unique = true)
+    @Column(name = "name", unique = true)
     public String getName() {
         return name;
     }

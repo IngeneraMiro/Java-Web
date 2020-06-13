@@ -32,12 +32,12 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public Set<RoleServiceModel> findAllRoles() {
-     return  roleRepository.findAll().stream().map(r->mapper.map(r,RoleServiceModel.class)).collect(Collectors.toSet());
+        return roleRepository.findAll().stream().map(r -> mapper.map(r, RoleServiceModel.class)).collect(Collectors.toSet());
 
     }
 
     @Override
     public RoleServiceModel findByAuthority(String role) {
-       return mapper.map(roleRepository.findByAuthority(role),RoleServiceModel.class);
+        return mapper.map(roleRepository.findByAuthority(role), RoleServiceModel.class);
     }
 }

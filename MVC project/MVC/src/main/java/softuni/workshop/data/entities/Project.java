@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 @Entity(name = "projects")
-public class Project extends BaseClass{
+public class Project extends BaseClass {
     private String name;
     private String description;
     private boolean isFinished;
@@ -26,7 +26,7 @@ public class Project extends BaseClass{
     public Project() {
     }
 
-    @Column(name = "name",nullable = false)
+    @Column(name = "name", nullable = false)
     public String getName() {
         return name;
     }
@@ -35,7 +35,7 @@ public class Project extends BaseClass{
         this.name = name;
     }
 
-    @Column(name = "description",nullable = false)
+    @Column(name = "description", nullable = false)
     public String getDescription() {
         return description;
     }
@@ -53,7 +53,7 @@ public class Project extends BaseClass{
         isFinished = finished;
     }
 
-    @Column(name = "payment",nullable = false)
+    @Column(name = "payment", nullable = false)
     public BigDecimal getPayment() {
         return payment;
     }
@@ -72,7 +72,7 @@ public class Project extends BaseClass{
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "company_id",nullable = false)
+    @JoinColumn(name = "company_id", nullable = false)
     public Company getCompany() {
         return company;
     }

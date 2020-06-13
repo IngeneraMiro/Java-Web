@@ -8,24 +8,24 @@ import softuni.workshop.service.services.ProjectService;
 public class ProjectServiceImpl implements ProjectService {
 
     @Override
-    public void importProjects(){
+    public void importProjects() {
         //TODO seed in database
     }
 
     @Override
     public boolean areImported() {
         //TODO check if repository has any records
-       return true;
+        return true;
     }
 
     @Override
     public String readProjectsXmlFile() {
         //TODO read xml file
-      return null;
+        return null;
     }
 
     @Override
-    public String exportFinishedProjects(){
+    public String exportFinishedProjects() {
         //TODO export finished projects
         return null;
     }

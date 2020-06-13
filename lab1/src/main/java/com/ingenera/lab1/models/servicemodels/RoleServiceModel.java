@@ -2,7 +2,7 @@ package com.ingenera.lab1.models.servicemodels;
 
 import com.ingenera.lab1.models.entities.Roles;
 
-public class RoleServiceModel extends BaseServiceModel{
+public class RoleServiceModel extends BaseServiceModel {
 
     private Roles role;
 

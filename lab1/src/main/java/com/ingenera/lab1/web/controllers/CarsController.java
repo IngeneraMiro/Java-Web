@@ -18,8 +18,8 @@ public class CarsController {
     }
 
     @GetMapping("/all")
-    public ModelAndView allCars(ModelAndView modelAndView){
-        modelAndView.addObject("offers",this.offerService.getAllOffers());
+    public ModelAndView allCars(ModelAndView modelAndView) {
+        modelAndView.addObject("offers", this.offerService.getAllOffers());
         modelAndView.setViewName("all");
 
         return (modelAndView);

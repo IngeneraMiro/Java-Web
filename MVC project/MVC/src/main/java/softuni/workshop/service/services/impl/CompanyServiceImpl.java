@@ -1,4 +1,5 @@
 package softuni.workshop.service.services.impl;
+
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,14 +33,14 @@ public class CompanyServiceImpl implements CompanyService {
 
     @Override
     public void importCompanies() throws JAXBException, FileNotFoundException {
-        CompanySeedRootDto companySeedRootDto = xmlParser.importFromXml(CompanySeedRootDto.class,GlobalConstants.XML_COMPANIES_PATH);
-        companySeedRootDto.getCompanySeedDtos().stream().map(c->new Company(c.getName(),new ArrayList<Project>())).
+        CompanySeedRootDto companySeedRootDto = xmlParser.importFromXml(CompanySeedRootDto.class, GlobalConstants.XML_COMPANIES_PATH);
+        companySeedRootDto.getCompanySeedDtos().stream().map(c -> new Company(c.getName(), new ArrayList<Project>())).
                 forEach(companyRepository::save);
     }
 
     @Override
     public boolean areImported() {
-        return companyRepository.count()>0;
+        return companyRepository.count() > 0;
     }
 
     @Override

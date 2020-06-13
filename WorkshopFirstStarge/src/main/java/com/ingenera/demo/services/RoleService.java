@@ -5,6 +5,7 @@ import com.ingenera.demo.models.servicemodels.RoleServiceModel;
 
 public interface RoleService {
 
-    RoleServiceModel getByName(String name);
-    Role  getRole(String name);
+    Role getByName(String name);
+
+    Role getRole(String name);
 }

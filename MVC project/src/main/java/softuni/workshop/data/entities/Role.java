@@ -1,5 +1,5 @@
 package softuni.workshop.data.entities;
 
-public class Role{
+public class Role {
     //TODO
 }

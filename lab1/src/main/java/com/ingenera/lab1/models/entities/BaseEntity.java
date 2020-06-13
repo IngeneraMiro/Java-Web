@@ -11,7 +11,7 @@ public class BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id",unique = true,nullable = false,updatable = false)
+    @Column(name = "id", unique = true, nullable = false, updatable = false)
     public long getId() {
         return id;
     }

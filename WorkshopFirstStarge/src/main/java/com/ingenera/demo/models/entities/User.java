@@ -6,16 +6,16 @@ import javax.persistence.*;
 @Table(name = "users")
 public class User extends BaseEntity {
 
-   private String username;
-   private String password;
-   private String email;
-   private String git;
-   private Role role;
+    private String username;
+    private String password;
+    private String email;
+    private String git;
+    private Role role;
 
     public User() {
     }
 
-    @Column(name = "user_name",unique = true,nullable = false)
+    @Column(name = "user_name", unique = true, nullable = false)
     public String getUsername() {
         return username;
     }
@@ -24,7 +24,7 @@ public class User extends BaseEntity {
         this.username = username;
     }
 
-    @Column(name = "password",nullable = false)
+    @Column(name = "password", nullable = false)
     public String getPassword() {
         return password;
     }
@@ -33,7 +33,7 @@ public class User extends BaseEntity {
         this.password = password;
     }
 
-    @Column(name = "email",unique = true,nullable = false)
+    @Column(name = "email", unique = true, nullable = false)
     public String getEmail() {
         return email;
     }
@@ -42,7 +42,7 @@ public class User extends BaseEntity {
         this.email = email;
     }
 
-    @Column(name = "github_address",nullable = false,unique = true)
+    @Column(name = "github_address", nullable = false, unique = true)
     public String getGit() {
         return git;
     }
@@ -52,7 +52,7 @@ public class User extends BaseEntity {
     }
 
 
-    @ManyToOne(cascade= CascadeType.REFRESH)
+    @ManyToOne(cascade = CascadeType.REFRESH)
     public Role getRole() {
         return role;
     }

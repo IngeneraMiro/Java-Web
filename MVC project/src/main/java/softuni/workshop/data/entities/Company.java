@@ -1,5 +1,5 @@
 package softuni.workshop.data.entities;
 
-public class Company{
+public class Company {
     //TODO
 }

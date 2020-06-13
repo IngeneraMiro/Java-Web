@@ -8,12 +8,12 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 
-public class XmlParserImpl implements XmlParser{
+public class XmlParserImpl implements XmlParser {
     @Override
     public <O> void exportToXml(O object, String filePath) throws JAXBException {
         JAXBContext context = JAXBContext.newInstance(object.getClass());
         Marshaller marshaller = context.createMarshaller();
-        marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT,true);
+        marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
         marshaller.marshal(object, new File(filePath));
     }
 
@@ -22,6 +22,6 @@ public class XmlParserImpl implements XmlParser{
     public <O> O importFromXml(Class<O> klazz, String filePath) throws JAXBException, FileNotFoundException, FileNotFoundException {
         JAXBContext context = JAXBContext.newInstance(klazz);
         Unmarshaller unmarshaller = context.createUnmarshaller();
-        return (O)unmarshaller.unmarshal(new FileReader(filePath));
+        return (O) unmarshaller.unmarshal(new FileReader(filePath));
     }
 }

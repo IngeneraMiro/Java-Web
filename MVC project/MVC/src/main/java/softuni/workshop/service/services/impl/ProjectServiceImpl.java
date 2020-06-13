@@ -38,9 +38,9 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public void importProjects() throws JAXBException, FileNotFoundException {
-        ProjectSeedRootDto projectSeedRootDto = xmlParser.importFromXml(ProjectSeedRootDto.class,GlobalConstants.XML_PROJECT_PATH);
-        for (ProjectDto p: projectSeedRootDto.getProjectDtos()){
-            Project project = mapper.map(p,Project.class);
+        ProjectSeedRootDto projectSeedRootDto = xmlParser.importFromXml(ProjectSeedRootDto.class, GlobalConstants.XML_PROJECT_PATH);
+        for (ProjectDto p : projectSeedRootDto.getProjectDtos()) {
+            Project project = mapper.map(p, Project.class);
             Company company = companyService.getCompanyByName(project.getCompany().getName());
             project.setCompany(company);
             projectRepository.save(project);
@@ -50,7 +50,7 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public boolean areImported() {
-        return projectRepository.count()>0;
+        return projectRepository.count() > 0;
     }
 
     @Override
@@ -64,12 +64,12 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public String exportFinishedProjects(){
+    public String exportFinishedProjects() {
         StringBuilder sb = new StringBuilder();
         List<Project> projects = projectRepository.getFinishedProjects();
-        for (Project p: projects){
+        for (Project p : projects) {
             sb.append("Project name: ").append(p.getName()).append("\n\tDescription: ")
-               .append(p.getDescription()).append("\n\t").append(String.format("%.2f",p.getPayment()))
+                    .append(p.getDescription()).append("\n\t").append(String.format("%.2f", p.getPayment()))
                     .append(System.lineSeparator());
         }
 

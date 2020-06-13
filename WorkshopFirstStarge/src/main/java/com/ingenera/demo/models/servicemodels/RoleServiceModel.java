@@ -1,6 +1,6 @@
 package com.ingenera.demo.models.servicemodels;
 
-public class RoleServiceModel extends BaseServiceModel{
+public class RoleServiceModel extends BaseServiceModel {
 
     private String name;
 

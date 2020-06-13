@@ -8,10 +8,10 @@ import softuni.workshop.data.entities.Project;
 import java.util.List;
 
 @Repository
-public interface ProjectRepository extends JpaRepository<Project,Integer> {
+public interface ProjectRepository extends JpaRepository<Project, Integer> {
 
-     Project findByName(String name);
+    Project findByName(String name);
 
-     @Query("select p from projects as p where p.finished = true")
-     List<Project> getFinishedProjects();
+    @Query("select p from projects as p where p.finished = true")
+    List<Project> getFinishedProjects();
 }

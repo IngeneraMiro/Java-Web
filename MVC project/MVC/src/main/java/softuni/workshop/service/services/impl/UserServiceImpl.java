@@ -37,20 +37,20 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public UserServiceModel registerUser(UserRegisterModel userRegisterModel) {
-        User user = mapper.map(userRegisterModel,User.class);
-         if(userRepository.count()==0){
+        User user = mapper.map(userRegisterModel, User.class);
+        if (userRepository.count() == 0) {
             roleService.seedRolesInDb();
-            user.setAuthorities(roleService.findAllRoles().stream().map(r->mapper.map(r, Role.class)).collect(Collectors.toSet()));
-         }else{
-             user.setAuthorities(new HashSet<>());
-             user.getAuthorities().add(mapper.map(roleService.findByAuthority("USER"),Role.class));
-         }
-         user.setPassword(encoder.encode(userRegisterModel.getPassword()));
-         return mapper.map(userRepository.save(user),UserServiceModel.class);
+            user.setAuthorities(roleService.findAllRoles().stream().map(r -> mapper.map(r, Role.class)).collect(Collectors.toSet()));
+        } else {
+            user.setAuthorities(new HashSet<>());
+            user.getAuthorities().add(mapper.map(roleService.findByAuthority("USER"), Role.class));
+        }
+        user.setPassword(encoder.encode(userRegisterModel.getPassword()));
+        return mapper.map(userRepository.save(user), UserServiceModel.class);
     }
 
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-      return   userRepository.findByUsername(s);
+        return userRepository.findByUsername(s);
     }
 }
