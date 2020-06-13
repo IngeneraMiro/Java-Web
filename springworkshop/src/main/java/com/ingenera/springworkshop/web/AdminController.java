@@ -78,9 +78,19 @@ public class AdminController {
         }else{
             modelAndView.setViewName("redirect:/admin/rights");
         }
-
         return modelAndView;
+    }
 
+    @PostMapping("/role_add")
+    public ModelAndView changeRole(ModelAndView modelAndView,@RequestParam String username,@RequestParam String role,
+                                   HttpSession session){
+        if(session.getAttribute("role").equals("ADMIN")) {
+            this.userService.changeRole(username, role);
+            modelAndView.setViewName("redirect:/home");
+        }else {
+            modelAndView.setViewName("redirect:/admin/rights");
+        }
+        return modelAndView;
     }
 
 }

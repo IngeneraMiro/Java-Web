@@ -3,6 +3,7 @@ package com.ingenera.springworkshop.web;
 import com.ingenera.springworkshop.models.bindmodels.UserBindModel;
 import com.ingenera.springworkshop.models.bindmodels.UserLogBindModel;
 import com.ingenera.springworkshop.models.viewmodels.UserServiceModel;
+import com.ingenera.springworkshop.models.viewmodels.UserViewModel;
 import com.ingenera.springworkshop.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -103,6 +104,15 @@ public class UsersController {
         session.invalidate();
         modelAndView.setViewName("index");
         return modelAndView;
+   }
+
+   @GetMapping("/profile")
+    public ModelAndView userDetails(ModelAndView modelAndView,HttpSession session){
+        UserServiceModel userServiceModel = (UserServiceModel) session.getAttribute("user");
+        UserViewModel user = this.userService.getUserDetails(userServiceModel.getUsername());
+       modelAndView.addObject("user",user);
+       modelAndView.setViewName("profile");
+       return modelAndView;
    }
 
 }

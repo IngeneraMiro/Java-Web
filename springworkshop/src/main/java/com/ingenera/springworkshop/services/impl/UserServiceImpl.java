@@ -3,6 +3,7 @@ package com.ingenera.springworkshop.services.impl;
 import com.ingenera.springworkshop.models.bindmodels.UserBindModel;
 import com.ingenera.springworkshop.models.entities.User;
 import com.ingenera.springworkshop.models.viewmodels.UserServiceModel;
+import com.ingenera.springworkshop.models.viewmodels.UserViewModel;
 import com.ingenera.springworkshop.repositories.UserRepository;
 import com.ingenera.springworkshop.services.RoleService;
 import com.ingenera.springworkshop.services.UserService;
@@ -70,5 +71,20 @@ public class UserServiceImpl implements UserService {
     public List<UserBindModel> getAllUsers() {
      return   this.userRepo.findAll().stream().map(u->this.mapper.map(u,UserBindModel.class)).collect(Collectors.toList());
 
+    }
+
+    @Override
+    public void changeRole(String username, String role) {
+        User user = this.userRepo.findByUsername(username).orElse(null);
+        assert user != null;
+        user.setRole(this.roleService.getRoleByName(role.toUpperCase()));
+        this.userRepo.saveAndFlush(user);
+    }
+
+    @Override
+    public UserViewModel getUserDetails(String name) {
+         User user = this.userRepo.findByUsername(name).orElse(null);
+         UserViewModel userViewModel = this.mapper.map(user,UserViewModel.class);
+         return userViewModel;
     }
 }
