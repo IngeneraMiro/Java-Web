@@ -12,8 +12,8 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mx-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">
-                        <span class="sr-only">Hello {username}</span>
+                    <a th:if="${session.role != 'ADMIN'}"
+                       th:text="${'Welcome '+ session.user.username}" class="nav-link" href="#">
                     </a>
                 </li>
 
@@ -31,14 +31,14 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Check Homework</a>
+                    <a class="nav-link" href="/homework/evaluation">Check Homework</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Add Homework</a>
+                    <a class="nav-link" th:href="@{/homework/add}">Add Homework</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Profile</a>
+                    <a class="nav-link" th:href="@{/users/profile}">Profile</a>
                 </li>
 
             </ul>
@@ -52,4 +52,4 @@
             </ul>
         </div>
     </nav>
-</th:block>>
+</th:block>

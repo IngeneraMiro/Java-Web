@@ -4,6 +4,7 @@ import com.ingenera.springworkshop.models.bindmodels.UserBindModel;
 import com.ingenera.springworkshop.models.bindmodels.UserLogBindModel;
 import com.ingenera.springworkshop.models.viewmodels.UserServiceModel;
 import com.ingenera.springworkshop.models.viewmodels.UserViewModel;
+import com.ingenera.springworkshop.services.HomeworkService;
 import com.ingenera.springworkshop.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,15 +18,18 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 @RequestMapping("/users")
 public class UsersController {
     private final UserService userService;
+    private final HomeworkService homeworkService;
 
     @Autowired
-    public UsersController(UserService userService) {
+    public UsersController(UserService userService, HomeworkService homeworkService) {
         this.userService = userService;
+        this.homeworkService = homeworkService;
     }
 
 
@@ -110,7 +114,9 @@ public class UsersController {
     public ModelAndView userDetails(ModelAndView modelAndView,HttpSession session){
         UserServiceModel userServiceModel = (UserServiceModel) session.getAttribute("user");
         UserViewModel user = this.userService.getUserDetails(userServiceModel.getUsername());
-       modelAndView.addObject("user",user);
+        List<String> homeworks = this.homeworkService.getHomeworksByUser(userServiceModel.getId());
+        modelAndView.addObject("homeworks",String.join(", ",homeworks));
+        modelAndView.addObject("user",user);
        modelAndView.setViewName("profile");
        return modelAndView;
    }

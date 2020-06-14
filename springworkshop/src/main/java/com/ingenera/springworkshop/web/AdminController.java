@@ -13,6 +13,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -38,12 +40,15 @@ public class AdminController {
     @GetMapping("/add_exercise")
     public ModelAndView addExercise(@Valid @ModelAttribute("exerciseBindModel")ExerciseBindModel exerciseBindModel,
                                     BindingResult result,ModelAndView modelAndView, HttpSession session){
-        System.out.println();
+
+        if(session!=null && session.getAttribute("user")!=null)
         if(session.getAttributeNames().hasMoreElements() && session.getAttribute("role").equals("ADMIN")){
             modelAndView.addObject("exerciseBindModel",exerciseBindModel);
             modelAndView.setViewName("exercise-add");
         }else{
             modelAndView.setViewName("redirect:/admin/rights");
+        }else {
+            modelAndView.setViewName("redirect:/users/login");
         }
         return modelAndView;
     }
@@ -53,7 +58,7 @@ public class AdminController {
     public ModelAndView exerciseValidate(@Valid @ModelAttribute("exerciseBindModel")ExerciseBindModel exerciseBindModel,
                                          BindingResult result, HttpSession session, RedirectAttributes redirectAttributes,
                                          ModelAndView modelAndView){
-        if(session!=null) {
+        if(session!=null && session.getAttribute("user")!=null) {
             if (result.hasErrors()) {
                 redirectAttributes.addFlashAttribute("exerciseBindModel", exerciseBindModel);
                 modelAndView.setViewName("redirect:/admin/add_exercise");

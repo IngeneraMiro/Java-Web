@@ -43,7 +43,7 @@ public class Exercise extends BaseEntity {
     }
 
     @Column(name = "due_date")
-    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     @FutureOrPresent(message = "Date can not be in the past")
     public LocalDateTime getDueDate() {
         return dueDate;

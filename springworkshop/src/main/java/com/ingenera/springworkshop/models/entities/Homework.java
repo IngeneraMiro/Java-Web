@@ -1,5 +1,7 @@
 package com.ingenera.springworkshop.models.entities;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
@@ -19,6 +21,7 @@ public class Homework extends BaseEntity {
     }
 
     @Column(name = "added_on")
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     public LocalDateTime getAddedOn() {
         return addedOn;
     }
