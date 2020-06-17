@@ -3,6 +3,7 @@ package com.ingenera.springworkshop.services.impl;
 import com.ingenera.springworkshop.models.bindmodels.HomeworkBindModel;
 import com.ingenera.springworkshop.models.entities.Exercise;
 import com.ingenera.springworkshop.models.entities.Homework;
+import com.ingenera.springworkshop.models.viewmodels.HomeworkViewModel;
 import com.ingenera.springworkshop.models.viewmodels.UserServiceModel;
 import com.ingenera.springworkshop.repositories.HomeworkRepository;
 import com.ingenera.springworkshop.services.ExerciseService;
@@ -42,7 +43,22 @@ public class HomeworkServiceImpl implements HomeworkService {
     }
 
     @Override
+    public Homework getHomeworkById(Long id) {
+        return this.homeworkRepository.getById(id);
+    }
+
+    @Override
     public List<String> getHomeworksByUser(Long id) {
         return homeworkRepository.getAllByUser(id).stream().map(h->h.getExercise().getName()).collect(Collectors.toList());
+    }
+
+    @Override
+    public HomeworkViewModel getRandomHomework(Long id) {
+        Homework homework = new Homework();
+        while (homework.getId()==null || homework.getAuthor().getId()==id){
+            Long gLong = 1 + (long) (Math.random() * (this.homeworkRepository.count() - 1));
+            homework = this.homeworkRepository.getById(gLong);
+        }
+       return this.mapper.map(homework,HomeworkViewModel.class);
     }
 }

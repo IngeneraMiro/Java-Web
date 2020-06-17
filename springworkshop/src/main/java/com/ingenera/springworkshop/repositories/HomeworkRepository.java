@@ -13,4 +13,6 @@ public interface HomeworkRepository extends JpaRepository<Homework,Long> {
        @Query(value = "select h from Homework as h where h.author.id = ?1")
        List<Homework> getAllByUser(Long id);
 
+       Homework getById(Long id);
+
 }

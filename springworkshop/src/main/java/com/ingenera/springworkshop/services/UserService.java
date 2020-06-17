@@ -13,6 +13,8 @@ public interface UserService {
 
     User getUserByName(String username);
 
+    User getUserById(Long id);
+
     boolean checkUsername(String username);
 
     UserServiceModel registerUser(UserBindModel userBindModel);
@@ -22,4 +24,5 @@ public interface UserService {
     void changeRole(String username, String role);
 
     UserViewModel getUserDetails(String name);
+    UserViewModel getUserDetailsById(Long id);
 }

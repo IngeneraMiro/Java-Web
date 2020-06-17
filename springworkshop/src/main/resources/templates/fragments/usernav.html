@@ -13,12 +13,12 @@
             <ul class="navbar-nav mx-auto">
                 <li class="nav-item">
                     <a th:if="${session.role != 'ADMIN'}"
-                       th:text="${'Welcome '+ session.user.username}" class="nav-link" href="#">
+                       th:text="${'Welcome '+ session.user.username}" class="nav-link" th:href="@{/home}">
                     </a>
                 </li>
 
                 <li th:if="${#session.getAttribute('role') eq 'ADMIN'}" class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+                    <a class="nav-link dropdown-toggle" th:href="@{/home}" id="navbarDropdown"
                        role="button" data-toggle="dropdown" aria-haspopup="true"
                        aria-expanded="false">
                         Admin
@@ -31,7 +31,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="/homework/evaluation">Check Homework</a>
+                    <a class="nav-link" th:href="@{/homework/evaluation}">Check Homework</a>
                 </li>
 
                 <li class="nav-item">

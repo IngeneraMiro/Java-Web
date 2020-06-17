@@ -52,6 +52,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User getUserById(Long id) {
+        return this.userRepo.getById(id);
+    }
+
+    @Override
     public boolean checkUsername(String username) {
         return this.userRepo.existsByUsername(username);
     }
@@ -87,4 +92,11 @@ public class UserServiceImpl implements UserService {
          UserViewModel userViewModel = this.mapper.map(user,UserViewModel.class);
          return userViewModel;
     }
+
+    @Override
+    public UserViewModel getUserDetailsById(Long id) {
+        return this.mapper.map(this.userRepo.getById(id),UserViewModel.class);
+    }
+
+
 }

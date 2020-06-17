@@ -53,14 +53,15 @@
                 </div>
                 <div class="row">
                     <div class="col-12">
-                        <form action="#" method=""
-                              class="tm-signup-form">
+                        <form th:action="@{/homework/evaluation}" method="POST"
+                              th:object="${scoreBindModel}" class="tm-signup-form">
                             <div class="form-group">
                                 <label for="score">Score</label>
 
-                                <small class="text-danger">Score must be between 2 and 6 inclusive</small>
+                                <small th:if="${#fields.hasErrors('score')}" class="text-danger">Score must be between 2 and 6 inclusive</small>
                                 <br/>
-                                <select required class="custom-select col-xl-9 col-lg-8 col-md-8 col-sm-7" name="score"
+                                <select th:field="*{score}" required
+                                        class="custom-select col-xl-9 col-lg-8 col-md-8 col-sm-7" name="score"
                                         id="score">
                                     <option value="" selected>Enter your score</option>
                                     <option value="2">2</option>
@@ -73,10 +74,10 @@
                             <div class="form-group">
                                 <label for="textContent">Description</label>
                                 <br/>
-                                <textarea id="textContent" name="textContent" class="form-control validate"
+                                <textarea th:field="*{textContent}" id="textContent" name="textContent" class="form-control validate"
                                           rows="3" placeholder="Enter your comment" required></textarea>
 
-                                <small class="text-danger"> Comment text content must be more than 3 characters!
+                                <small th:if="${#fields.hasErrors('textContent')}" class="text-danger"> Comment text content must be more than 3 characters!
                                 </small>
 
                             </div>
@@ -101,7 +102,7 @@
                 <img src="/img/homework.png" alt="Homework pic" width="100%">
                 <div class="custom-file mt-3 mb-3">
                     <input id="fileInput" type="file" style="display:none;"/>
-                    <a href="user github address + /archive/master.zip">
+                    <a th:href="${git + '/archive/master.zip'}" target="_blank">
                         <input type="button" class="btn btn-primary d-block mx-xl-auto" value="Download homework"
                         /></a>
                 </div>
