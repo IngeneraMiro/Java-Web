@@ -5,6 +5,7 @@ import org.hibernate.validator.constraints.Length;
 import javax.persistence.*;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.FutureOrPresent;
+import javax.validation.constraints.Past;
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -24,7 +25,7 @@ public class Employee extends BaseEntity{
     }
 
     @Column(name = "birth_date",nullable = false)
-    @FutureOrPresent
+    @Past
     public Date getBirthDate() {
         return birthDate;
     }

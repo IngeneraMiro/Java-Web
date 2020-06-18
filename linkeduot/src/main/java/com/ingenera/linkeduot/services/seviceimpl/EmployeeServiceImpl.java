@@ -28,6 +28,6 @@ public class EmployeeServiceImpl implements EmployeeService {
         Employee employee = mapper.map(model,Employee.class);
         employee.setCompany(this.companyService.getByName(model.getCompany()));
 
-        return null;
+        return this.employeeRepository.saveAndFlush(employee);
     }
 }

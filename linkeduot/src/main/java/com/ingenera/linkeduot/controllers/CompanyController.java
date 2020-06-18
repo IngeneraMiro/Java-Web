@@ -54,8 +54,8 @@ public class CompanyController {
     }
 
     @GetMapping("/all")
-    public String getAllCompanies(){
-
+    public String getAllCompanies(Model model){
+       model.addAttribute("companies",this.companyService.getAllCompanyInfo());
         return "company-all";
     }
 
