@@ -4,12 +4,21 @@ import java.math.BigDecimal;
 
 public class CompanyDetailsModel {
 
+    private Long id;
     private BigDecimal budget;
     private String description;
     private String name;
     private String town;
 
     public CompanyDetailsModel() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public BigDecimal getBudget() {

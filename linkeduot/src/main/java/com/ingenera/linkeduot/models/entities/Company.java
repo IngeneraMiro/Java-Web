@@ -2,10 +2,7 @@ package com.ingenera.linkeduot.models.entities;
 
 import org.hibernate.validator.constraints.Length;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
@@ -67,7 +64,7 @@ public class Company extends BaseEntity{
         this.town = town;
     }
 
-    @OneToMany(mappedBy = "company")
+    @OneToMany(mappedBy = "company",fetch = FetchType.EAGER,cascade = CascadeType.REMOVE)
     public List<Employee> getEmployees() {
         return employees;
     }

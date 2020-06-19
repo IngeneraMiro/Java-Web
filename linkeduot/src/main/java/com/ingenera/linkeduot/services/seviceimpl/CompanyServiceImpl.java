@@ -6,7 +6,6 @@ import com.ingenera.linkeduot.models.viewmodels.CompanyDetailsModel;
 import com.ingenera.linkeduot.models.viewmodels.CompanyViewModel;
 import com.ingenera.linkeduot.repositories.CompanyRepository;
 import com.ingenera.linkeduot.services.CompanyService;
-import org.modelmapper.Converter;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -57,5 +56,10 @@ public class CompanyServiceImpl implements CompanyService {
     @Override
     public CompanyDetailsModel getViewByName(String name) {
         return this.mapper.map(this.companyRepository.getByName(name),CompanyDetailsModel.class);
+    }
+
+    @Override
+    public void deleteCompany(Long id) {
+        this.companyRepository.deleteById(id);
     }
 }

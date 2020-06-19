@@ -1,31 +1,32 @@
-package com.ingenera.linkeduot.models.entities;
+package com.ingenera.linkeduot.models.viewmodels;
 
-import org.hibernate.validator.constraints.Length;
+import com.ingenera.linkeduot.models.entities.Company;
 
-import javax.persistence.*;
-import javax.validation.constraints.DecimalMin;
-import javax.validation.constraints.FutureOrPresent;
-import javax.validation.constraints.Past;
 import java.math.BigDecimal;
 import java.util.Date;
 
-@Entity
-@Table(name = "employees")
-public class Employee extends BaseEntity{
+public class EmployeeDetailsModel {
 
+    private Long id;
     private Date birthDate;
     private String educationLevel;
     private String firstName;
     private String jobTitle;
     private String lastName;
     private BigDecimal salary;
-    private Company company;
+    private String company;
 
-    public Employee() {
+    public EmployeeDetailsModel() {
     }
 
-    @Column(name = "birth_date",nullable = false)
-    @Past
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public Date getBirthDate() {
         return birthDate;
     }
@@ -34,7 +35,6 @@ public class Employee extends BaseEntity{
         this.birthDate = birthDate;
     }
 
-    @Column(name = "education_level",nullable = false)
     public String getEducationLevel() {
         return educationLevel;
     }
@@ -43,8 +43,6 @@ public class Employee extends BaseEntity{
         this.educationLevel = educationLevel;
     }
 
-    @Column(name = "first_name",nullable = false)
-    @Length(min = 2)
     public String getFirstName() {
         return firstName;
     }
@@ -53,7 +51,6 @@ public class Employee extends BaseEntity{
         this.firstName = firstName;
     }
 
-    @Column(name = "job_title",nullable = false)
     public String getJobTitle() {
         return jobTitle;
     }
@@ -62,8 +59,6 @@ public class Employee extends BaseEntity{
         this.jobTitle = jobTitle;
     }
 
-    @Column(name = "last_name",nullable = false)
-    @Length(min = 2)
     public String getLastName() {
         return lastName;
     }
@@ -72,8 +67,6 @@ public class Employee extends BaseEntity{
         this.lastName = lastName;
     }
 
-    @Column(name = "salary",nullable = false)
-    @DecimalMin(value = "0",inclusive = true)
     public BigDecimal getSalary() {
         return salary;
     }
@@ -82,13 +75,11 @@ public class Employee extends BaseEntity{
         this.salary = salary;
     }
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "compani_id")
-    public Company getCompany() {
+    public String getCompany() {
         return company;
     }
 
-    public void setCompany(Company company) {
+    public void setCompany(String company) {
         this.company = company;
     }
 }

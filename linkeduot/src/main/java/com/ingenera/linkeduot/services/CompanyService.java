@@ -14,4 +14,5 @@ public interface CompanyService {
    Company getByName(String name);
    List<CompanyViewModel> getAllCompanyInfo();
    CompanyDetailsModel getViewByName(String name);
+   void deleteCompany(Long id);
 }

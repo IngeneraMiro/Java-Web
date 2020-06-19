@@ -97,5 +97,4 @@
         </plugins>
     </build>
 
-    <url>localhost:8080</url>
 </project>
