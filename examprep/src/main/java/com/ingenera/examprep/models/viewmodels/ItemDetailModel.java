@@ -2,14 +2,15 @@ package com.ingenera.examprep.models.viewmodels;
 
 import java.math.BigDecimal;
 
-public class ItemViewModel {
+public class ItemDetailModel {
 
     private String id;
     private String name;
     private BigDecimal price;
     private String imgUrl;
+    private String description;
 
-    public ItemViewModel() {
+    public ItemDetailModel() {
     }
 
     public String getId() {
@@ -42,5 +43,13 @@ public class ItemViewModel {
 
     public void setImgUrl(String imgUrl) {
         this.imgUrl = imgUrl;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

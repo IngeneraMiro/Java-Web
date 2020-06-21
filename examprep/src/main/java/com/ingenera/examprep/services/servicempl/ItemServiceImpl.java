@@ -2,6 +2,7 @@ package com.ingenera.examprep.services.servicempl;
 
 import com.ingenera.examprep.models.bindmodels.ItemBindModel;
 import com.ingenera.examprep.models.entities.Item;
+import com.ingenera.examprep.models.viewmodels.ItemDetailModel;
 import com.ingenera.examprep.models.viewmodels.ItemViewModel;
 import com.ingenera.examprep.repositories.ItemRepository;
 import com.ingenera.examprep.services.CategoryService;
@@ -41,8 +42,25 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public List<ItemViewModel> getAllItems() {
-       return this.itemRepository.findAll().stream().map(i->this.mapper.map(i,ItemViewModel.class)).collect(Collectors.toList());
+       return this.itemRepository.findAll().stream().map(i->{
+           ItemViewModel item = this.mapper.map(i,ItemViewModel.class);
+           item.setImgUrl(String.format("/img/%s-%s.jpg",i.getGender(),i.getCategory().getCategory().name().toUpperCase()));
+           return item;
+       }).collect(Collectors.toList());
 
+    }
+
+    @Override
+    public ItemDetailModel getItemById(String id) {
+        Item item = this.itemRepository.getById(id);
+        ItemDetailModel detailModel = this.mapper.map(item,ItemDetailModel.class);
+        detailModel.setImgUrl(String.format("/img/%s-%s.jpg",item.getGender(),item.getCategory().getCategory().name().toUpperCase()));
+        return detailModel;
+    }
+
+    @Override
+    public void removeItem(String id) {
+        this.itemRepository.deleteById(id);
     }
 
 

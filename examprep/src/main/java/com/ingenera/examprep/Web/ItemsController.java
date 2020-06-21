@@ -2,16 +2,15 @@ package com.ingenera.examprep.Web;
 
 import com.ingenera.examprep.models.bindmodels.ItemBindModel;
 import com.ingenera.examprep.models.entities.Gender;
+import com.ingenera.examprep.models.entities.Item;
+import com.ingenera.examprep.models.viewmodels.ItemDetailModel;
 import com.ingenera.examprep.services.CategoryService;
 import com.ingenera.examprep.services.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
@@ -32,9 +31,10 @@ public class ItemsController {
         this.categoryService = categoryService;
     }
 
-    @GetMapping("/details")
-    public String getItemDetails(HttpSession session){
+    @GetMapping("/details/{id}")
+    public String getItemDetails(Model model,HttpSession session, @PathVariable("id")String id){
         if(session.getAttribute("userId")!=null) {
+            model.addAttribute("detail",this.itemService.getItemById(id));
             return "details-item";
         }
         return "redirect:/user/login";
@@ -70,5 +70,13 @@ public class ItemsController {
         return "redirect:/home";
     }
 
+    @GetMapping("/delete/{id}")
+    public String removeItem(@PathVariable("id")String id,HttpSession session){
+        if(session.getAttribute("userId")==null){
+            return "redirect:/user/login";
+        }
+        this.itemService.removeItem(id);
+        return "redirect:/home";
+    }
 
 }
