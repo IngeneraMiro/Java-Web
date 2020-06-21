@@ -18,11 +18,11 @@
                         <img class="card-img-top" th:src="*{imgUrl}" alt="image">
                     </div>
                     <div class="card-body pb-1">
-                        <h5 th:text="*{name}" class="card-title text-center" >Item name</h5>
+                        <h5 th:text="|Item name: *{name}|" class="card-title text-center" >Item name</h5>
                     </div>
                     <ul class="offer-details list-group list-group-flush">
                         <li class="list-group-item">
-                            <div th:text="*{price}" class="card-text text-center"><span>Item price</span></div>
+                            <div th:text="|Item price: *{price}|" class="card-text text-center"><span>Item price</span></div>
                         </li>
                     </ul>
                 </a>
