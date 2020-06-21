@@ -28,7 +28,7 @@ public class HomeController {
     public String getHome(Model model, HttpSession session){
         if(session.getAttribute("userId")!=null) {
             model.addAttribute("counter",this.itemService.countItems());
-
+            model.addAttribute("items", this.itemService.getAllItems());
             return "home";
         }
         return "redirect:/user/login";

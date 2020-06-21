@@ -2,12 +2,16 @@ package com.ingenera.examprep.services.servicempl;
 
 import com.ingenera.examprep.models.bindmodels.ItemBindModel;
 import com.ingenera.examprep.models.entities.Item;
+import com.ingenera.examprep.models.viewmodels.ItemViewModel;
 import com.ingenera.examprep.repositories.ItemRepository;
 import com.ingenera.examprep.services.CategoryService;
 import com.ingenera.examprep.services.ItemService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ItemServiceImpl implements ItemService {
@@ -34,4 +38,12 @@ public class ItemServiceImpl implements ItemService {
     public Long countItems() {
         return this.itemRepository.count();
     }
+
+    @Override
+    public List<ItemViewModel> getAllItems() {
+       return this.itemRepository.findAll().stream().map(i->this.mapper.map(i,ItemViewModel.class)).collect(Collectors.toList());
+
+    }
+
+
 }

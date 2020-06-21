@@ -29,16 +29,16 @@
     <div class="container-fluid">
         <div class="offers row mx-auto d-flex flex-row justify-content-center">
             <div  class="offer card col-sm-6 col-md-3  col-lg-2 m-1 p-0">
-                <a href="/">
+                <a th:each="i:${items}" th:href="@{/items/details/{id}(id=${i.getId()})}">
                     <div class="card-img-top-wrapper">
                         <img class="card-img-top" src="/img/MALE-SHORTS.jpg" alt="image">
                     </div>
                     <div class="card-body pb-1">
-                        <h5 class="card-title text-center" >Item name</h5>
+                        <h5 th:text="${i.name}" class="card-title text-center" >Item name</h5>
                     </div>
                     <ul class="offer-details list-group list-group-flush">
                         <li class="list-group-item">
-                            <div class="card-text text-center"><span>Item price</span></div>
+                            <div th:text="${i.price}" class="card-text text-center"><span>Item price</span></div>
                         </li>
                     </ul>
                 </a>

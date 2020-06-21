@@ -7,6 +7,7 @@ import javax.persistence.*;
 public class Category extends BaseEntity{
 
     private ItemCategories category;
+    private String description;
 
     public Category() {
     }
@@ -23,5 +24,13 @@ public class Category extends BaseEntity{
 
     public void setCategory(ItemCategories category) {
         this.category = category;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }
