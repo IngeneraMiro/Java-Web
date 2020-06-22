@@ -12,6 +12,7 @@
         <hr class="hr-3"/>
         <form th:object="${userLogModel}" class="mx-auto w-25 bg-dark bg-gray p-3 rounded" action="/user/login" method="POST">
             <h4 th:if="${fail}" class="text-center bg-dark text-danger">Wrong username or password</h4>
+            <h4 th:if="${ban}" class="text-center bg-dark text-danger">You are banned for 3 minutes!</h4>
 			<h6 th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="text-center bg-dark text-danger">Wrong username</h6>
 			<h6 th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="text-center bg-dark text-danger">Wrong password</h6>
             <div class="form-group">

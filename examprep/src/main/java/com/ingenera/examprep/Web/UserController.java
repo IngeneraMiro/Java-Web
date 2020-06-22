@@ -4,6 +4,7 @@ import com.ingenera.examprep.models.bindmodels.UserBindModel;
 import com.ingenera.examprep.models.bindmodels.UserLogModel;
 import com.ingenera.examprep.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -15,6 +16,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.chrono.ChronoLocalDateTime;
 
 @Controller
 @RequestMapping("/user")
@@ -59,6 +63,9 @@ public class UserController {
         if(!model.containsAttribute("userLogModel")){
             model.addAttribute("userLogModel",new UserLogModel());
             model.addAttribute("fail",false);
+            if(session.getAttribute("ban")==null) {
+                model.addAttribute("ban", false);
+            }
         }
         return "login";
     }
@@ -68,19 +75,17 @@ public class UserController {
                                BindingResult result,RedirectAttributes redirectAttributes,
                                HttpSession session){
 
+        if(session.getAttribute("time")!=null && LocalDateTime.now().isBefore((LocalDateTime) session.getAttribute("time"))){
+            redirectAttributes.addFlashAttribute("ban",true);
+            redirectAttributes.addFlashAttribute("userLogModel",userLogModel);
+            return "redirect:login";
+        }else {
+            redirectAttributes.addFlashAttribute("ban",false);
+        }
+
          if(result.hasErrors()){
             redirectAttributes.addFlashAttribute("userLogModel",userLogModel);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userLogModel",result);
-            if(session.getAttribute("numFails")==null){
-                session.setAttribute("numFails",1);
-            }else {
-                int num = (int) session.getAttribute("numFails");
-                session.setAttribute("numFails",num+1);
-            }
-            if((int)session.getAttribute("numFails")==3){
-                session.setAttribute("numFails",0);
-                return "index";
-            }
             return "redirect:login";
         }
         try {
@@ -94,8 +99,12 @@ public class UserController {
                 session.setAttribute("numFails",num+1);
             }
             if((int)session.getAttribute("numFails")==3){
+                redirectAttributes.addFlashAttribute("userLogModel",new UserLogModel());
+                redirectAttributes.addFlashAttribute("ban",true);
+                redirectAttributes.addFlashAttribute("fail",false);
                 session.setAttribute("numFails",0);
-                return "index";
+                session.setAttribute("time",LocalDateTime.now().plusMinutes(3));
+                return "redirect:login";
             }
             redirectAttributes.addFlashAttribute("userLogModel",userLogModel);
             redirectAttributes.addFlashAttribute("fail",true);
