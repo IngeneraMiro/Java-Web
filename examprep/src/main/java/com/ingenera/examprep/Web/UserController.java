@@ -55,7 +55,7 @@ public class UserController {
     }
 
     @GetMapping("/login")
-    public String logUser(Model model, RedirectAttributes redirectAttributes){
+    public String logUser(Model model, RedirectAttributes redirectAttributes,HttpSession session){
         if(!model.containsAttribute("userLogModel")){
             model.addAttribute("userLogModel",new UserLogModel());
             model.addAttribute("fail",false);
@@ -67,15 +67,36 @@ public class UserController {
     public String loginConform(@Valid @ModelAttribute("userLogModel")UserLogModel userLogModel,
                                BindingResult result,RedirectAttributes redirectAttributes,
                                HttpSession session){
-        if(result.hasErrors()){
+
+         if(result.hasErrors()){
             redirectAttributes.addFlashAttribute("userLogModel",userLogModel);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userLogModel",result);
+            if(session.getAttribute("numFails")==null){
+                session.setAttribute("numFails",1);
+            }else {
+                int num = (int) session.getAttribute("numFails");
+                session.setAttribute("numFails",num+1);
+            }
+            if((int)session.getAttribute("numFails")==3){
+                session.setAttribute("numFails",0);
+                return "index";
+            }
             return "redirect:login";
         }
         try {
             String logged = this.userService.getUserByUsernameAndPass(userLogModel.getUsername(), userLogModel.getPassword());
             session.setAttribute("userId",logged);
         }catch (Exception e){
+            if(session.getAttribute("numFails")==null){
+                session.setAttribute("numFails",1);
+            }else {
+                int num = (int) session.getAttribute("numFails");
+                session.setAttribute("numFails",num+1);
+            }
+            if((int)session.getAttribute("numFails")==3){
+                session.setAttribute("numFails",0);
+                return "index";
+            }
             redirectAttributes.addFlashAttribute("userLogModel",userLogModel);
             redirectAttributes.addFlashAttribute("fail",true);
             return "redirect:login";
