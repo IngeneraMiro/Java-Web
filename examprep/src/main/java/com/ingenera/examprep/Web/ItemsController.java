@@ -2,8 +2,6 @@ package com.ingenera.examprep.Web;
 
 import com.ingenera.examprep.models.bindmodels.ItemBindModel;
 import com.ingenera.examprep.models.entities.Gender;
-import com.ingenera.examprep.models.entities.Item;
-import com.ingenera.examprep.models.viewmodels.ItemDetailModel;
 import com.ingenera.examprep.services.CategoryService;
 import com.ingenera.examprep.services.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;

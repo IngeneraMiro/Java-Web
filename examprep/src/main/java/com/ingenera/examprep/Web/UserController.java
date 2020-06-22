@@ -2,7 +2,6 @@ package com.ingenera.examprep.Web;
 
 import com.ingenera.examprep.models.bindmodels.UserBindModel;
 import com.ingenera.examprep.models.bindmodels.UserLogModel;
-import com.ingenera.examprep.models.entities.User;
 import com.ingenera.examprep.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
