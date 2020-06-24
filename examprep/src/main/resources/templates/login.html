@@ -10,7 +10,7 @@
     <main >
         <h1 class="text-center mt-2"><span class="badge badge-pill badge-dark" >Login</span></h1>
         <hr class="hr-3"/>
-        <form th:object="${userLogModel}" class="mx-auto w-25 bg-dark bg-gray p-3 rounded" action="/user/login" method="POST">
+        <form th:object="${userLogModel}" class="mx-auto w-25 bg-dark bg-gray p-3 rounded" th:action="@{/user/login}" th:method="POST">
             <h4 th:if="${fail}" class="text-center bg-dark text-danger">Wrong username or password</h4>
             <h4 th:if="${ban}" class="text-center bg-dark text-danger">You are banned for 3 minutes!</h4>
 			<h6 th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="text-center bg-dark text-danger">Wrong username</h6>

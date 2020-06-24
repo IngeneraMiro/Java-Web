@@ -11,7 +11,7 @@
     <groupId>com.ingenera</groupId>
     <artifactId>oldexam</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
     <name>oldexam</name>
     <description>prepare fot the exam</description>
 
