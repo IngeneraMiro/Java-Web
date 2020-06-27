@@ -9,13 +9,14 @@ public class UserBindModel {
 
     private String username;
     private String password;
+    private String confirmPassword;
     private String email;
 
     public UserBindModel() {
     }
 
     @NotNull(message = "Username can not be null!")
-    @Length(min = 2,max = 10,message = "Username must be between 2 and 10 characters!")
+    @Length(min = 3,max = 21,message = "Username must be between 3 and 20 characters!")
     public String getUsername() {
         return username;
     }
@@ -25,9 +26,19 @@ public class UserBindModel {
     }
 
     @NotNull(message = "Password can not be null!")
-    @Length(min = 2,max = 10,message = "Password must be between 2 and 10 characters!")
+    @Length(min = 3,max = 21,message = "Password must be between 3 and 20 characters!")
     public String getPassword() {
         return password;
+    }
+
+    @NotNull
+    @Length(min = 3,max = 21,message = "Password must be between 3 and 20 characters!")
+    public String getConfirmPassword() {
+        return confirmPassword;
+    }
+
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
     }
 
     public void setPassword(String password) {

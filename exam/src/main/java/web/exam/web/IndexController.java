@@ -10,7 +10,6 @@ public class IndexController {
 
     @GetMapping("/")
     public String index(HttpSession session){
-
         return "index";
     }
 

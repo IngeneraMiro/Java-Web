@@ -2,36 +2,34 @@ package web.exam.models.entities;
 
 import org.hibernate.validator.constraints.Length;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import javax.validation.constraints.Email;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 @Entity
 @Table(name = "users")
 public class User extends BaseEntity{
 
-    private String username;
+    private String userName;
     private String password;
     private String email;
 
     public User() {
     }
 
-    @Column(name = "users",nullable = false,unique = true)
+    @Column(name = "name",unique =true,nullable = false)
     @Length(min = 3,max = 21)
-    public String getUsername() {
-        return username;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     @Column(name = "password",nullable = false)
-    @Length(min = 2,max = 21)
+    @Length(min = 3,max = 21)
     public String getPassword() {
         return password;
     }
@@ -49,6 +47,4 @@ public class User extends BaseEntity{
     public void setEmail(String email) {
         this.email = email;
     }
-
-
 }
