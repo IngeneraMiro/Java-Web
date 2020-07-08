@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<th:block th:include="/fragments/header"/>
+<body>
+<div id="home">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <th:block th:include="/fragments/navigation"/>
+            </div>
+        </div>
+
+        <div class="container mt-lg-2 border-right border-bottom bg-transparent h-100">
+            <h1 th:text="${#session.getAttribute('pName')}" class="w-100 text-light text-right"></h1>
+        </div>
+    </div>
+    <div th:if="${func}" th:object="${practice}" class="row text-white ml-5 mt-5 w-25 w-75">
+        <div class="col w-50" >
+            <p th:text="*{name}"></p>
+            <p th:text="*{regNumber}" t></p>
+            <p th:text="*{phoneNumber}"></p>
+            <p th:text="${#temporals.format(practice.createdOn, 'dd-MM-yyyy HH:mm')}"></p>
+            <th:block th:switch="*{active}">
+            <p th:case="true">Активна</p>
+            <p th:case="false">Неактивна</p>
+            </th:block>
+        </div>
+        <div class="w-25  col ">
+            <form th:action="@{/admin/practices/add(rname=*{regNumber},par=${#session.getAttribute('userType')})}" th:method="post">
+                <input type="radio" id="1" name="add" value="doc">
+                <label for="1">Добави лекар</label><br>
+                <input type="radio" id="2" name="add" value="nurse">
+                <label for="2">Добави сестра</label><br>
+                <input type="radio" id="3" name="add" value="pat">
+                <label for="3">Добави пациент</label>
+                <div class="input-group ">
+                    <button type="submit" class="btn text-white btn-primary d-inline-block mx-3">Изпълни</button>
+                </div>
+            </form>
+        </div>
+        <div class="w-25 col">
+            <form th:action="@{/admin/practices/edit}" th:method="post">
+                <input type="radio" id="4" name="action" value="deactivate">
+                <label for="4">Деактивирай практиката</label><br>
+                <input type="radio" id="5" name="action" value="activate">
+                <label for="5">Активирай практиката</label><br>
+                <input type="radio" id="6" name="action" value="edit">
+                <label for="6">Редактирай практиката</label>
+                <div class="input-group ">
+                    <button type="submit" class="btn text-white btn-primary d-inline-block mx-3">Изпълни</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <th:block th:include="/fragments/footer"/>
+</div>
+</body>
+</html>

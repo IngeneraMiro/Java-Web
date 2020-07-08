@@ -18,15 +18,17 @@
                               class="tm-login-form">
                             <div class="input-group">
                                 <label for="username" class="col-xl-4 col-lg-4 col-md-4 col-sm-5 col-form-label">Username</label>
-                                <input th:field="*{username}"  name="username" type="text"
+                                <input th:field="*{username}" name="username" type="text"
                                        class="form-control validate col-xl-9 col-lg-8 col-md-8 col-sm-7"
                                        id="username" placeholder="Enter username">
                                 <div class="mx-auto">
                                     <th:block>
-                                        <small th:if="${userexist}" class="text-danger">--User whit that name is already registered!--</small>
+                                        <small th:if="${userexist}" class="text-danger">--User whit that name is already
+                                            registered!--</small>
                                     </th:block>
                                     <th:block>
-                                        <small th:if="${#fields.hasErrors('username')}" class="text-danger">Username must be between 2 and 10 characters</small>
+                                        <small th:if="${#fields.hasErrors('username')}" class="text-danger">Username
+                                            must be between 2 and 10 characters</small>
                                     </th:block>
                                 </div>
                             </div>
@@ -35,7 +37,8 @@
                                 <input name="password" type="password" class="form-control validate"
                                        id="password" placeholder="Enter password">
                                 <div class="mx-auto">
-                                    <small th:if="${#fields.hasErrors('password')}" class="text-danger">Password must be betweeen 3 and 10 characters</small>
+                                    <small th:if="${#fields.hasErrors('password')}" class="text-danger">Password must be
+                                        betweeen 3 and 10 characters</small>
                                 </div>
                             </div>
                             <div class="input-group mt-3">
@@ -44,7 +47,8 @@
                                 <input name="confirmPassword" type="password" class="form-control validate"
                                        id="confirmPassword" placeholder="Confirm password">
                                 <div class="mx-auto">
-                                    <small th:if="${passwornotdmatch}" class="text-danger">Password did not match, check carefully</small>
+                                    <small th:if="${passwornotdmatch}" class="text-danger">Password did not match, check
+                                        carefully</small>
                                 </div>
                             </div>
                             <div class="input-group mt-3">
@@ -53,7 +57,8 @@
                                 <input th:field="*{email}" name="email" type="email" class="form-control validate"
                                        id="email" placeholder="Enter email">
                                 <div class="mx-auto">
-                                    <small th:if="${#fields.hasErrors('email')}" class="text-danger">Enter valid email address</small>
+                                    <small th:if="${#fields.hasErrors('email')}" class="text-danger">Enter valid email
+                                        address</small>
                                 </div>
                             </div>
                             <div class="input-group mt-3">
@@ -61,7 +66,8 @@
                                 <input th:field="*{git}" name="git" type="text" class="form-control validate" id="git"
                                        placeholder="Enter git">
                                 <div class="mx-auto text-center align-content-center">
-                                    <small th:if="${#fields.hasErrors('git')}" class="text-danger">Enter git address following this pattern </small>
+                                    <small th:if="${#fields.hasErrors('git')}" class="text-danger">Enter git address
+                                        following this pattern </small>
                                 </div>
                             </div>
                             <div class="input-group mt-3">
