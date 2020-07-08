@@ -28,6 +28,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/","/index","/home","/css/**","/js/**","/images/**","/users/login").permitAll()
                 .antMatchers("/practices/**").hasRole("ADMIN")
                 .anyRequest().authenticated()
-                .and().formLogin();
+                .and().formLogin().loginPage("/users/login").successForwardUrl("/redirect");
     }
 }
